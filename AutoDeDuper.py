@@ -3,7 +3,7 @@ from os import walk, path, remove
 import Crypto.Hash.SHA as sha
 
 def dedupe(bsize=131072):
-	assert (str(type(bsize)) == "<type 'int'>"), "not passed an integer"
+	#assert (str(type(bsize)) == "<type 'int'>"), "not passed an integer"
 	filelist=[]
 	sizes={}
 	redund=[]
@@ -17,15 +17,15 @@ def dedupe(bsize=131072):
 		if not wrksize in sizes.keys():
 			sizes[wrksize] = [upath,]
 			usc+=1
-			print 'us '+str(usc)
+			print('us '+str(usc))
 		else:
 			sizes[wrksize] += [upath]
 			dsc+=1
-			print 'ds '+str(dsc)
+			print('ds '+str(dsc))
 	uhc=0
 	dhc=0
 
-	for pathlist in sizes.itervalues():
+	for pathlist in sizes.values():
 		if len(pathlist) > 1:
 			hashes = {}
 			for upath in pathlist:
@@ -40,12 +40,12 @@ def dedupe(bsize=131072):
 				if not whash in hashes.keys():
 					hashes[whash] = [upath,]
 					uhc+=1
-					print 'uh '+str(uhc)
+					print('uh '+str(uhc))
 				else:
 					hashes[whash] += [upath]
 					dhc+=1
-					print 'DUPE '+str(dhc)
-			for matchlist in hashes.itervalues():
+					print('DUPE '+str(dhc))
+			for matchlist in hashes.values():
 				if len(matchlist) > 1:
 					redund.append(matchlist)
 	deletedlist=[]
