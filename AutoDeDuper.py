@@ -1,4 +1,4 @@
-#! /usr/bin/env/python
+#! /usr/bin/env/python3
 from os import walk, path, remove
 import Crypto.Hash.SHA as sha
 
